@@ -1,4 +1,4 @@
-# Auditoria do gerador e dos apps — 9 de outubro de 2026
+# Auditoria do gerador e dos apps — 11 de outubro de 2026
 
 ## Correções
 
@@ -15,7 +15,7 @@
 
 ## Verificações
 
-Suíte final: 36 testes aprovados. Lacunas idênticas com respostas diferentes na fonte são descartadas para evitar questões ambíguas, sem interromper a geração dos demais itens.
+Suíte final: 40 testes aprovados (nenhuma falha). Lacunas idênticas com respostas diferentes na fonte são descartadas para evitar questões ambíguas, sem interromper a geração dos demais itens.
 
 - Suíte de testes cobre extração EPUB e Office textual, segmentação, geração, validade das referências, duplicatas, XP, flashcards, desfazer, respostas, simulados, sete abas, fontes e exportação.
 - O HTML portátil é executado em um ambiente DOM: inicia e navega pelas sete abas mesmo em contexto file:// sem IndexedDB.
@@ -29,3 +29,11 @@ A geração é local e extrativa: usa recuperação literal e regras explícitas
 DOC/PPT e fidelidade visual Office precisam do conversor local. GitHub Pages não executa esse conversor. O teste nativo do Office/LibreOffice e a instalação em aparelhos físicos iPhone/Android continuam pendentes. Nenhum conjunto finito de testes garante funcionamento perfeito com todos os arquivos ou navegadores. Os testes documentam os cenários efetivamente cobertos.
 
 Para usar a nova quantidade de exercícios em um app criado antes desta versão, envie o material ao gerador novamente e baixe um novo pacote. Pacotes já baixados não se modificam sozinhos; uma nova geração pode ter identidade e progresso diferentes.
+
+## Continuação da auditoria — 11 de outubro
+
+- Corrigida a ordem da extração textual de PPTX: a sequência agora vem da apresentação, não dos nomes dos arquivos internos. Slides órfãos não entram no material; referências quebradas geram erro explícito.
+- PDF real de duas páginas: extração, página e retângulo de origem, geração e validação aprovados.
+- OCR real com dados por+eng locais: imagem de teste reconhecida com 95% de confiança, seguida de geração e validação dos exercícios. O teste usa o adaptador Node do Tesseract; não substitui o teste do worker no navegador.
+- Acrescentados testes de instalação do cache, material embutido, navegação sem rede e falha de download de recurso essencial.
+- Conversão nativa novamente impedida pelo ambiente ao iniciar LibreOffice (spawn EPERM); não foi declarada aprovada.
